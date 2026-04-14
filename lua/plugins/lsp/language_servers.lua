@@ -3,7 +3,7 @@ local M = {}
 local python_ls = "basedpyright"
 
 M.servers = {
-  lua_ls = { enabled = true },
+  lua_ls = { enabled = true, {} },
   pyright = {
     enabled = python_ls == "pyright",
     config = {
@@ -61,9 +61,9 @@ M.servers = {
       on_attach = function(client) client.server_capabilities.semanticTokensProvider = nil end,
     },
   },
-  gopls = { enabled = true },
+  gopls = { enabled = false },
   rust_analyzer = {
-    enabled = true,
+    enabled = false,
     config = {
       settings = {
         ["rust-analyzer"] = {
@@ -77,13 +77,13 @@ M.servers = {
       },
     },
   },
-  dockerls = { enabled = true },
-  bashls = { enabled = true },
-  jsonls = { enabled = true },
-  html = { enabled = false },
-  ts_ls = { enabled = false },
-  cssls = { enabled = false },
-  tailwindcss = { enabled = false },
+  dockerls = { enabled = true, {} },
+  bashls = { enabled = true, {} },
+  jsonls = { enabled = true, {} },
+  html = { enabled = false, {} },
+  ts_ls = { enabled = false, {} },
+  cssls = { enabled = false, {} },
+  tailwindcss = { enabled = false, {} },
 }
 
 function M.get_enabled()

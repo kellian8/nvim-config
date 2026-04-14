@@ -244,7 +244,7 @@ return {
             { -- greeting
               text = {
                 {
-                  require("util").get_greeting("Leon"),
+                  require("util").get_greeting("KEL"),
                   hl = "String",
                 },
               },
