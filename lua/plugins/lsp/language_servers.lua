@@ -53,6 +53,17 @@ M.servers = {
       },
     },
   },
+  jdtls = {
+    enabled = true,
+    config = {
+      settings = {
+        java = {
+          diagnosticsMode = "openFilesOnly",
+          typecheckingMode = "openFilesOnly",
+        },
+      },
+    },
+  },
   clangd = {
     enabled = true,
     config = {

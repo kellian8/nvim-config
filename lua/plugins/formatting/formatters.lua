@@ -43,7 +43,7 @@ M.formatters = {
   prettier = {
     enabled = true,
     ensure_installed = "prettier",
-    fts = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+    fts = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "java" },
     prepend_args = { "--print-width", "120" },
   },
   rustfmt = {
