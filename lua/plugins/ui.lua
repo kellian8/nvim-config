@@ -31,7 +31,7 @@ return {
     opts = {
       char = "",
       context_char = "│",
-      show_current_context = true,
+      show_current_context = false,
     },
     config = function(_, opts)
       vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { link = "IndentBlanklineChar" })

@@ -3,48 +3,28 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    branch = "master", -- TODO: migrate to 'main'
+    branch = "main",
     event = { "LazyFile" },
-    opts = {
-      highlight = { enable = true },
-      indent = {
-        enable = true,
-        -- disable = { "python" },
-      },
-      ensure_installed = {
-        "bash",
-        "c",
-        "cpp",
-        "diff",
-        "html",
-        "javascript",
-        "jsdoc",
-        "json",
-        "jsonc",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "printf",
-        "python",
-        "query",
-        "regex",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
-        "python",
-        "go",
-        "gomod",
-      },
-      auto_install = true,
-      ignore_install = { "dockerfile" },
-    },
-    config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+    config = function()
+      -- main branch: highlight and indent are handled natively by Neovim's
+      -- built-in vim.treesitter. Enable them per-buffer via FileType autocmd.
+      local function attach(buf)
+        local ok = pcall(vim.treesitter.start, buf)
+        if not ok then return end
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args) attach(args.buf) end,
+      })
+
+      -- attach to any buffers already open when this config runs
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf) then
+          attach(buf)
+        end
+      end
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
